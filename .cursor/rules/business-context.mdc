@@ -1,0 +1,20 @@
+---
+description: Information about the application's purpose and design philosophy
+globs: **/*.ts,**/*.tsx,**/*.rs
+alwaysApply: false
+---
+This application is a desktop email client for macOS that integrates with Gmail accounts. Key business context:
+
+- Primary purpose: Provide a modern, efficient interface to Gmail
+- Target users: Professionals who manage high email volumes
+- Design philosophy: Inspired by Linear's minimalist UI/UX approach
+- Key features:
+  * Email viewing, composing, and management
+  * Gmail label integration
+  * Smart categorization and prioritization
+  * Keyboard shortcuts for efficient navigation
+  * Clean, distraction-free reading experience
+  * Thread-based conversation view
+  * Integrated search functionality
+
+The application aims to combine Gmail's powerful backend with a more refined, focused user experience similar to Linear's project management interface - emphasizing speed, keyboard navigability, and a clean aesthetic with strategic use of color for highlighting important elements.
