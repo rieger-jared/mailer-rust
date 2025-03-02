@@ -3,55 +3,59 @@ import reactLogo from '@/assets/react.svg';
 import { invoke } from '@tauri-apps/api/core';
 import { sayHello } from '@/utils/test';
 import '@/App.css';
+import { AppSidebar } from './components/app-sidebar';
+import { Separator } from '@radix-ui/react-dropdown-menu';
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from './components/ui/breadcrumb';
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from './components/ui/sidebar';
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState('');
-  const [name, setName] = useState('');
-  const [helloMsg, setHelloMsg] = useState('');
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke('greet', { name }));
-  }
-
-  function testHello() {
-    setHelloMsg(sayHello(name || 'World'));
-  }
-
   return (
     <main className='container'>
-      <h1>Welcome to Tauri + React</h1>
-
-      <div className='row'>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src='/vite.svg' className='logo vite' alt='Vite logo' />
-        </a>
-        <a href='https://tauri.app' target='_blank'>
-          <img src='/tauri.svg' className='logo tauri' alt='Tauri logo' />
-        </a>
-        <a href='https://reactjs.org' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className='row'
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-          testHello();
-        }}
+      <SidebarProvider
+        style={
+          {
+            '--sidebar-width': '350px',
+          } as React.CSSProperties
+        }
       >
-        <input
-          id='greet-input'
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder='Enter a name...'
-        />
-        <button type='submit'>Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-      <p>{helloMsg}</p>
+        <AppSidebar />
+        <SidebarInset>
+          <header className='sticky top-0 flex shrink-0 items-center gap-2 border-b bg-background p-4'>
+            <SidebarTrigger className='-ml-1' />
+            <Separator orientation='vertical' className='mr-2 h-4' />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className='hidden md:block'>
+                  <BreadcrumbLink href='#'>All Inboxes</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className='hidden md:block' />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Inbox</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </header>
+          <div className='flex flex-1 flex-col gap-4 p-4'>
+            {Array.from({ length: 24 }).map((_, index) => (
+              <div
+                key={index}
+                className='aspect-video h-12 w-full rounded-lg bg-muted/50'
+              />
+            ))}
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
     </main>
   );
 }
