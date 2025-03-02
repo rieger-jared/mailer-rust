@@ -12,5 +12,8 @@ This is a Tauri-based application with a Rust backend and a web-based frontend. 
 - Bun as the JavaScript runtime and package manager
 - Vite for the frontend build system
 - Running on macOS environment
+- We use Shadcn 
+- we use tailwind
+-  Do not use NPM or yarn
 
 The application follows modern React patterns including functional components and hooks. The Tauri portion handles system-level operations including file system access, notifications, and other native features. The frontend communicates with the Rust backend via Tauri's IPC commands. The project is configured for debugging both the Rust and TypeScript portions simultaneously using VSCode's debugging tools.
